@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>bykael</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Leckerli+One&family=Fredoka:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* Layout: seperti Moriimise — bingkai, cover di atas, menu pil, sidebar link + panel isi, footer hijau.
+   Palet "gulali": D554AE · F8AED3 · AABD5F · F9F988 */
+:root{
+  --magenta:#d554ae;
+  --magenta-deep:#b13a8c;   /* teks harga & judul (lebih gelap biar kebaca) */
+  --pink:#f8aed3;
+  --pink-soft:#fde4f1;
+  --green:#aabd5f;
+  --green-deep:#6f8236;
+  --green-soft:#eef3d9;
+  --yellow:#f9f988;
+  --yellow-soft:#fdfdd6;
+  --cream:#fffafd;
+  --ink:#5b3352;
+  --ink-soft:#8d6383;
+  --font-display:'Leckerli One','Brush Script MT',cursive;
+  --font-body:'Fredoka','Trebuchet MS','Segoe UI',sans-serif;
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{
+  font-family:var(--font-body);color:var(--ink);font-size:15px;
+  background-color:var(--pink-soft);
+  background-image:radial-gradient(rgba(213,84,174,.22) 1.5px,transparent 2px);
+  background-size:16px 16px;
+  padding-block:20px 40px;padding-inline:16px;
+}
+.frame{max-width:760px;margin:0 auto;background:var(--magenta);border-radius:34px;padding:10px;
+  box-shadow:0 10px 0 #a93d88,0 18px 40px rgba(213,84,174,.3)}
+.inner{background:var(--cream);border-radius:26px;overflow:hidden}
+
+/* cover */
+.hero{background:var(--pink);border-bottom:3px dotted var(--magenta)}
+.hero img{display:block;width:100%;height:auto;aspect-ratio:4/3;object-fit:cover;max-width:100%}
+
+/* menu */
+nav{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;padding:18px 16px;
+  background:linear-gradient(180deg,var(--green-soft),var(--cream))}
+nav button{font-family:var(--font-body);font-weight:600;font-size:15px;color:var(--magenta-deep);
+  background:#fff;border:2px solid var(--pink);border-radius:999px;padding:9px 18px;cursor:pointer;
+  box-shadow:0 3px 8px rgba(213,84,174,.2);transition:transform .15s,background .15s}
+nav button:hover{background:var(--pink-soft);transform:translateY(-2px)}
+nav button[aria-selected="true"]{background:var(--magenta);border-color:var(--magenta-deep);color:#fff}
+:focus-visible{outline:3px solid var(--green-deep);outline-offset:2px}
+
+/* layout */
+.content{display:grid;grid-template-columns:1fr 1.25fr;gap:18px;padding:22px 20px}
+.content>*{min-width:0}
+@media(max-width:680px){.content{grid-template-columns:1fr}.sidebar{order:2}}
+
+/* sidebar */
+.sidebar{border:2px dashed var(--pink);border-radius:20px;padding:18px 14px;text-align:center;
+  background:linear-gradient(180deg,#fff,var(--pink-soft));align-self:start}
+.side-title{font-family:var(--font-display);font-size:32px;color:var(--magenta);margin:0;line-height:1.2}
+.hearts{color:var(--green-deep);letter-spacing:4px;font-size:13px;margin:2px 0 14px}
+.links{display:grid;gap:12px}
+.linkcard{display:flex;flex-direction:column;align-items:center;gap:2px;text-decoration:none;color:var(--ink);
+  border:3px solid #fff;border-radius:16px;padding:11px 8px;transition:transform .15s;
+  background:radial-gradient(circle,rgba(255,255,255,.85) 2px,transparent 2.5px) 0 0/12px 12px,var(--pink);
+  box-shadow:0 4px 10px rgba(213,84,174,.25)}
+.linkcard:hover{transform:scale(1.03) rotate(-1deg)}
+.linkcard b{font-family:var(--font-display);font-weight:400;font-size:21px;color:var(--magenta-deep);line-height:1.3}
+.linkcard small{font-size:12px;font-weight:600;background:rgba(255,255,255,.85);border-radius:999px;padding:1px 10px}
+.linkcard.testi{background-color:var(--green)}
+.linkcard.testi b{color:#fff;text-shadow:0 1px 2px var(--green-deep),0 0 1px var(--green-deep)}
+.linkcard.tele{background-color:var(--yellow)}
+.linkcard.tele b{color:var(--green-deep)}
+.foot-emoji{font-size:26px;color:var(--magenta);margin-top:14px}
+
+/* panel */
+.panel{border:2px dashed var(--green);border-radius:20px;padding:20px 18px;background:linear-gradient(180deg,#fff,var(--green-soft))}
+.panel h2{font-family:var(--font-display);font-weight:400;font-size:30px;color:var(--magenta);margin:0 0 12px;line-height:1.25;text-wrap:balance}
+.panel p{line-height:1.75;margin:0 0 12px}
+.divider{text-align:center;color:var(--magenta);letter-spacing:5px;font-size:12px;margin:14px 0}
+.info{display:grid;gap:8px;margin:0 0 12px}
+.info div{display:flex;justify-content:space-between;gap:10px;background:#fff;border:2px solid var(--pink-soft);border-radius:14px;padding:9px 14px;font-size:14px}
+.info b{color:var(--magenta-deep);text-align:right}
+.note{background:var(--yellow-soft);border:2px dashed var(--green);border-radius:16px;padding:10px 14px;font-size:14px;font-weight:500}
+.sign{text-align:center;font-family:var(--font-display);font-size:24px;color:var(--green-deep);margin:4px 0 0}
+ul.tnc{list-style:none;padding:0;margin:0}
+ul.tnc li{position:relative;padding:9px 0 9px 26px;border-bottom:1px dashed var(--pink);line-height:1.65}
+ul.tnc li:last-child{border-bottom:0}
+ul.tnc li::before{content:"♡";position:absolute;left:2px;top:9px;color:var(--magenta)}
+
+/* pricelist */
+.search{display:flex;align-items:center;gap:8px;background:#fff;border:2px solid var(--pink);border-radius:999px;padding:2px 14px;margin-bottom:14px}
+.search input{flex:1;min-width:0;border:0;background:transparent;font:inherit;color:var(--ink);padding:9px 0}
+.search input:focus{outline:none}
+.search:focus-within{outline:3px solid var(--green-deep)}
+.cat{border:2px solid var(--pink-soft);border-radius:16px;margin-bottom:12px;overflow:hidden;background:#fff}
+.cat>summary{list-style:none;cursor:pointer;padding:12px 16px;font-weight:700;font-size:15.5px;color:var(--magenta-deep);
+  background:linear-gradient(180deg,#fff,var(--pink-soft));display:flex;align-items:center;gap:8px;user-select:none}
+.cat>summary::-webkit-details-marker{display:none}
+.cat>summary .kao{font-weight:500;color:var(--green-deep);font-size:13px}
+.cat>summary .arrow{margin-left:auto;color:var(--magenta);transition:transform .2s}
+.cat[open]>summary .arrow{transform:rotate(90deg)}
+.subcat{font-weight:700;font-size:12.5px;color:var(--green-deep);padding:12px 16px 2px;text-transform:uppercase;letter-spacing:.06em}
+.chips{display:flex;flex-wrap:wrap;gap:7px;padding:8px 16px 12px}
+.chip{font:inherit;font-size:13.5px;font-weight:600;cursor:pointer;color:var(--magenta-deep);
+  background:var(--pink-soft);border:1.5px solid var(--pink);border-radius:999px;padding:5px 12px;transition:transform .15s,box-shadow .15s}
+.chip:hover{transform:translateY(-2px);box-shadow:0 3px 7px rgba(213,84,174,.3)}
+.c1 .chip{background:var(--green-soft);border-color:var(--green);color:var(--green-deep)}
+.c2 .chip{background:var(--yellow-soft);border-color:#d9d95a;color:var(--green-deep)}
+.empty{text-align:center;color:var(--ink-soft);padding:12px}
+
+/* detail */
+.back{font:inherit;font-weight:600;font-size:14px;cursor:pointer;color:var(--magenta-deep);background:#fff;
+  border:2px solid var(--pink);border-radius:999px;padding:7px 16px;margin-bottom:14px}
+.back:hover{background:var(--pink-soft)}
+.crumb{font-size:12px;color:var(--ink-soft);margin:0 0 8px;text-transform:uppercase;letter-spacing:.06em}
+.pcard{background:#fff;border:3px solid #5d5a8c;border-radius:18px;padding:14px 14px 16px;box-shadow:0 4px 0 rgba(93,90,140,.25)}
+.pcard h3{margin:0 0 10px;text-align:center;font-family:var(--font-body);font-weight:700;font-size:22px;letter-spacing:.04em;text-transform:uppercase;
+  color:#fff;background:var(--magenta);border-radius:999px;padding:6px 12px}
+.grp{margin-top:12px}
+.grp-t{display:block;text-align:center;font-weight:700;font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:#fff;
+  background:var(--green);border:2px solid var(--green-deep);border-radius:999px;padding:3px 10px;text-shadow:0 1px 0 var(--green-deep)}
+.grp-s{text-align:center;font-size:12px;font-weight:600;color:var(--magenta);text-transform:uppercase;letter-spacing:.06em;margin:6px 0 2px}
+.row{display:flex;justify-content:space-between;align-items:baseline;gap:12px;width:100%;text-align:left;font:inherit;font-size:14.5px;
+  color:var(--ink);background:transparent;border:0;border-bottom:1px dashed var(--pink);padding:8px 6px;cursor:pointer;border-radius:8px}
+.row:last-child{border-bottom:0}
+.row:hover{background:var(--pink-soft)}
+.row[aria-pressed="true"]{background:var(--yellow-soft);box-shadow:inset 0 0 0 2px var(--green)}
+.row .price{color:var(--magenta-deep);font-weight:700;white-space:nowrap;font-variant-numeric:tabular-nums}
+.pnotes{font-size:13px;line-height:1.7;background:var(--pink-soft);border-radius:12px;padding:10px 14px;margin-top:12px}
+.pnotes b{color:var(--magenta-deep)}
+.hint{font-size:12.5px;color:var(--ink-soft);text-align:center;margin:12px 0 0}
+.order{display:block;text-align:center;margin-top:12px;text-decoration:none;font-weight:700;color:#fff;background:var(--magenta);
+  border:3px solid #fff;border-radius:16px;padding:12px;box-shadow:0 4px 10px rgba(213,84,174,.35);transition:transform .15s}
+.order:hover{transform:translateY(-2px)}
+.toast{font-size:12.5px;text-align:center;color:var(--green-deep);font-weight:600;margin:8px 0 0;min-height:1.2em}
+
+/* footer */
+footer{display:flex;flex-wrap:wrap;align-items:center;gap:12px;padding:18px 20px;
+  background:linear-gradient(180deg,var(--green-soft),var(--green));border-top:3px dotted var(--green-deep)}
+.fbtns{display:flex;gap:8px}
+.fbtns a{width:40px;height:40px;border-radius:50%;display:grid;place-items:center;text-decoration:none;font-size:16px;font-weight:700;
+  background:#fff;color:var(--magenta-deep);border:2px solid var(--green-deep);transition:transform .15s}
+.fbtns a:hover{transform:translateY(-2px);background:var(--yellow-soft)}
+.url{flex:1;min-width:0;background:#fff;border:2px solid var(--pink);border-radius:999px;padding:10px 16px;text-align:center;
+  font-size:13px;color:var(--ink-soft);letter-spacing:.5px;overflow-wrap:anywhere}
+
+@keyframes fade{from{opacity:.4;transform:translateY(6px)}to{opacity:1;transform:none}}
+#view{animation:fade .3s ease}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<div class="frame"><div class="inner">
+
+  <header class="hero">
+    <img src="cover.jpg" alt="hi, welcome to bykael — all u needed here, est. 2020" width="1200" height="900">
+  </header>
+
+  <nav role="tablist" aria-label="Menu">
+    <button role="tab" data-tab="welcome" aria-selected="true">⋆˙⟡ Welcome</button>
+    <button role="tab" data-tab="price" aria-selected="false">₊˚⊹ Pricelist ♡</button>
+    <button role="tab" data-tab="tnc" aria-selected="false">✎ T&amp;C</button>
+  </nav>
+
+  <div class="content">
+    <aside class="sidebar">
+      <p class="side-title">Links</p>
+      <div class="hearts">♡ ♡ ♡</div>
+      <div class="links">
+        <a class="linkcard" id="lnkCp" target="_blank" rel="noopener"><b>Contact Person</b><small>fast respon ⸝⸝ ˃ ᵕ ˂ ⸝⸝</small></a>
+        <a class="linkcard testi" id="lnkTesti" target="_blank" rel="noopener"><b>Testimoni</b><small>my proof ꒰ᐢ. .ᐢ꒱</small></a>
+        <a class="linkcard tele" id="lnkTele" target="_blank" rel="noopener"><b>Testi Terbaru</b><small>update di telegram ✈︎</small></a>
+      </div>
+      <div class="foot-emoji" aria-hidden="true">( ˶ˆᗜˆ˵ ) ♡</div>
+    </aside>
+    <main id="view"></main>
+  </div>
+
+  <footer>
+    <div class="fbtns">
+      <a id="ftHelp" title="Contact person" aria-label="Contact person" target="_blank" rel="noopener">?</a>
+      <a id="ftTesti" title="Testimoni" aria-label="Testimoni" target="_blank" rel="noopener">★</a>
+      <a id="ftTele" title="Testi terbaru (Telegram)" aria-label="Testi terbaru di Telegram" target="_blank" rel="noopener">✈︎</a>
+    </div>
+    <div class="url" id="siteUrl"></div>
+  </footer>
+</div></div>
+
+<script>
+/* =========================================================
+   1) DATA TOKO — ganti teks di dalam tanda kutip saja
+   ========================================================= */
+const CONFIG = {
+  name:     "bykael",
+  contact:  "http://tinyurl.com/fastresp",                                            // contact person
+  testi:    "https://drive.google.com/drive/folders/1gcJMDxPGEyGgrgDjV2udg8tL2ZbLrSOo", // folder testimoni
+  tele:     "https://t.me/testimilikael",                                              // testi terbaru
+  hours:    "06.00 — 02.00",
+  payment:  "All e-wallet & QRIS",
+  siteUrl:  ""   // isi alamat websitemu nanti, contoh: "namakamu.github.io/bykael"
+};
+
+/* =========================================================
+   2) PRICELIST
+   Kategori → sub → aplikasi.
+   Tiap aplikasi: { name, groups:[ { t:"Sharing", s:"keterangan kecil", rows:[ ["paket","harga"], ... ] } ], notes:"..." }
+   - "t" = label hijau (Sharing / Private / dll), boleh dikosongkan ""
+   - "s" = tulisan pink kecil (Full garansi, Plan premium, dll), boleh dihapus
+   ========================================================= */
+const PRICELIST = [
+ { title:"App Premium", kao:"₍ᐢ. .ᐢ₎ 🎬", subs:[
+  { title:"Streaming", apps:[
+   { name:"Netflix", groups:[
+     { t:"Sharing", s:"Full garansi", rows:[["3 Hari","9k"],["7 Hari","15k"],["14 Hari","22k"]] },
+     { t:"Sharing 1P1U", rows:[["1 Bulan","35k"],["2 Bulan","65k"],["3 Bulan","95k"]] },
+     { t:"Semi Private", rows:[["1 Bulan","40k"],["2 Bulan","80k"],["3 Bulan","110k"]] },
+     { t:"Sharing 1P2U", rows:[["1 Bulan","22k"],["2 Bulan","47k"],["3 Bulan","68k"]] },
+     { t:"Private", rows:[["1 Bulan","160k"]] }],
+     notes:"<b>1P1U</b> = 1 profil 1 user · <b>1P2U</b> = 1 profil 2 user · <b>Semi private</b> = akun berbagi dengan sedikit user" },
+   { name:"Disney+", groups:[
+     { t:"Sharing", s:"Full garansi · Plan premium", rows:[["1 Hari","9k"],["3 Hari","13k"],["7 Hari","16k"],["1 Bulan","29k"]] },
+     { t:"Private", rows:[["1 Bulan","150k"]] }] },
+   { name:"Amazon Prime", groups:[
+     { t:"Sharing", s:"Full garansi", rows:[["3 Hari","4k"],["7 Hari","6k"],["1 Bulan (5U)","10k"],["1 Bulan Anlim (3U)","15k"],["3 Bulan","29k"]] },
+     { t:"Private", rows:[["1 Bulan","22k"]] }] },
+   { name:"HBO Max", groups:[
+     { t:"Sharing", s:"Full garansi", rows:[["1 Bulan","17k"]] },
+     { t:"Private", rows:[["1 Bulan","57k"]] }] },
+   { name:"Vidio", groups:[
+     { t:"Sharing", s:"Full garansi", rows:[["TV Only — 1 Bulan","10k"],["Mobile Only — 1 Bulan","17k"],["All Device — 1 Bulan","25k"]] },
+     { t:"Private", s:"Full garansi", rows:[["TV Only — 1 Bulan","17k"],["Mobile Only — 1 Bulan","28k"],["All Device — 1 Bulan","50k"]] }] },
+   { name:"iQIYI", groups:[
+     { t:"Sharing", s:"Full garansi · Plan premium", rows:[["3 Hari","6k"],["7 Hari","8k"],["1 Bulan","12k"],["1 Bulan Anlim","15k"],["1 Tahun","27k"]] },
+     { t:"Private", rows:[["Plan Standart — 1 Bulan","27k"],["Plan Premium — 1 Bulan","32k"]] }] },
+   { name:"WeTV", groups:[
+     { t:"Sharing", s:"Full garansi", rows:[["3 Hari","5k"],["7 Hari","7k"],["1 Bulan","12k"],["1 Bulan Anlim","15k"],["3 Bulan","30k"]] },
+     { t:"Private", rows:[["1 Bulan","38k"]] }] },
+   { name:"Viu", groups:[
+     { t:"", s:"Full garansi", rows:[["3 Hari","3k"],["7 Hari","5k"],["1 Bulan","10k"],["2 Bulan","13k"],["3 Bulan","15k"],["1 Tahun","20k"]] }] },
+   { name:"Loklok", groups:[
+     { t:"Sharing", s:"Full garansi", rows:[["Plan Basic — 1 Bulan","15k"],["Plan Basic — 3 Bulan","37k"],["Plan Standart — 1 Bulan","18k"],["Plan Standart — 3 Bulan","47k"]] },
+     { t:"Private", rows:[["Plan Basic — 1 Bulan","50k"],["Plan Standart — 1 Bulan","80k"]] }] },
+   { name:"Bstation", groups:[
+     { t:"Sharing", s:"Full garansi", rows:[["1 Hari","3k"],["3 Hari","5k"],["7 Hari","7k"],["1 Bulan","12k"],["3 Bulan","23k"],["1 Tahun","30k"]] }] },
+   { name:"Youku", groups:[
+     { t:"Sharing", s:"Full garansi", rows:[["1 Bulan","10k"],["3 Bulan","27k"],["1 Tahun","30k"]] }] },
+   { name:"Crunchyroll", groups:[
+     { t:"Sharing", s:"Full garansi", rows:[["1 Bulan","20k"],["1 Tahun","34k"]] }] },
+   { name:"Catchplay", groups:[
+     { t:"Sharing", s:"Full garansi", rows:[["1 Bulan","12k"],["1 Tahun","35k"]] }] },
+   { name:"Viki", groups:[{ t:"Sharing", s:"Full garansi", rows:[["1 Bulan","12k"]] }] },
+   { name:"Vision+", groups:[{ t:"Sharing", s:"Full garansi", rows:[["1 Bulan","12k"]] }] },
+   { name:"Mango TV", groups:[{ t:"Sharing", s:"Full garansi", rows:[["1 Bulan","13k"]] }] },
+   { name:"Drakor ID", groups:[{ t:"Sharing", rows:[["1 Tahun","25k"]] }] }
+  ]},
+  { title:"Music", apps:[
+   { name:"YouTube", groups:[
+     { t:"Indplan", s:"Full garansi · Akun seller", rows:[["1 Bulan","15k"]] },
+     { t:"Famplan", rows:[["1 Bulan","8k"],["2 Bulan","15k"]] },
+     { t:"Mixplan", s:"Only akun seller", rows:[["2 Bulan","35k"],["3 Bulan","40k"],["4 Bulan","50k"],["6 Bulan","65k"]] }] },
+   { name:"Spotify", groups:[{ t:"Indplan", s:"Full garansi · Only akun seller", rows:[["1 Bulan","23k"]] }] },
+   { name:"Apple Music", groups:[{ t:"iMess", s:"Full garansi", rows:[["1 Bulan","10k"],["2 Bulan","19k"],["3 Bulan","30k"]] }] }
+  ]},
+  { title:"VPN", apps:[
+   { name:"Nord VPN", groups:[{ t:"", s:"Full garansi", rows:[["1 Tahun","25k"]] }] },
+   { name:"Express VPN", groups:[{ t:"", s:"Full garansi", rows:[["1 Bulan","15k"]] }] },
+   { name:"Windscribe VPN", groups:[{ t:"", s:"Full garansi", rows:[["1 Bulan","15k"]] }] }
+  ]},
+  { title:"Storage & Lainnya", apps:[
+   { name:"Google One Drive 2TB", groups:[{ t:"Private 2TB", s:"Full garansi", rows:[["1 Bulan","18k"],["3 Bulan","30k"],["1 Tahun","48k"]] }] },
+   { name:"Penyimpanan Google 2TB", groups:[{ t:"Private", s:"Full garansi", rows:[["1 Bulan","17k"],["3 Bulan","30k"],["6 Bulan","55k"]] }] },
+   { name:"Get Contact", groups:[{ t:"", s:"Full garansi", rows:[["1 Bulan","12k"]] }] }
+  ]}
+ ]},
+
+ { title:"App Editing", kao:"(っ˘ω˘ς ) ✂️", subs:[
+  { title:"Foto & Video", apps:[
+   { name:"Canva", groups:[{ t:"Member", rows:[["1 Hari","1.500"],["3 Hari","2k"],["7 Hari","5k"],["1 Bulan","9k"],["3 Bulan","15k"],["1 Tahun","20k"],["Designer + 500P — Lifetime","28k"]] }] },
+   { name:"CapCut Pro", groups:[
+     { t:"Sharing", rows:[["7 Hari","8k"],["1 Bulan","23k"],["2 Bulan","50k"]] },
+     { t:"Private", rows:[["7 Hari","13k"],["1 Bulan","35k"]] }] },
+   { name:"Alight Motion", groups:[{ t:"Private", s:"Full garansi", rows:[["1 Bulan","9k"],["3 Bulan","15k"],["1 Tahun","20k"]] }] },
+   { name:"Meitu", groups:[
+     { t:"Sharing", s:"Full garansi · VIP (bukan VIP+)", rows:[["1 Bulan","15k"]] },
+     { t:"Private", rows:[["1 Bulan","35k"]] }] },
+   { name:"Picsart", groups:[
+     { t:"Sharing", s:"Full garansi", rows:[["1 Bulan","7k"],["2 Bulan","13k"],["3 Bulan","25k"]] },
+     { t:"Private", rows:[["1 Bulan","14k"]] }] },
+   { name:"Lightroom", groups:[{ t:"iOS / Andro", s:"Garansi 6 bulan", rows:[["1 Tahun","20k"],["+ Preset","5k"]] }] },
+   { name:"VSCO X", groups:[{ t:"iOS / Andro", s:"Garansi 6 bulan", rows:[["1 Tahun","20k"]] }] },
+   { name:"Tezza", groups:[{ t:"Andro", s:"Garansi 6 bulan", rows:[["1 Tahun","25k"]] }] }
+  ]},
+  { title:"Kamera Aesthetic", apps:[
+   { name:"Dazzcam", groups:[{ t:"Lifetime", rows:[["Garansi 6 Bulan","20k"],["Garansi Setahun","30k"]] }] },
+   { name:"Oldroll", groups:[{ t:"Andro", s:"Garansi 6 bulan", rows:[["Lifetime","20k"]] }] },
+   { name:"Polar", groups:[{ t:"iOS / Andro", s:"Garansi 6 bulan", rows:[["Lifetime","22k"]] }] },
+   { name:"8MM", groups:[{ t:"iOS", s:"Garansi 6 bulan", rows:[["Lifetime","20k"]] }] }
+  ]},
+  { title:"Gambar", apps:[
+   { name:"ibisPaint", groups:[{ t:"iOS / Andro", s:"Garansi 6 bulan", rows:[["1 Tahun","23k"]] }] },
+   { name:"Procreate", groups:[{ t:"iPad", s:"Garansi 6 bulan", rows:[["Lifetime","22k"]] }] }
+  ]}
+ ]},
+
+ { title:"Education Needs", kao:"(๑•̀ㅂ•́)و✧ 📚", subs:[
+  { title:"AI", apps:[
+   { name:"ChatGPT Go", groups:[
+     { t:"Sharing", s:"Full garansi", rows:[["1 Bulan","30k"]] },
+     { t:"Private", s:"Bisa akun pribadi", rows:[["1 Bulan","55k"]] }] },
+   { name:"Gemini", groups:[{ t:"Private", rows:[["1 Bulan","20k"]] }] },
+   { name:"Perplexity", groups:[
+     { t:"Sharing", s:"Full garansi", rows:[["1 Bulan (4U)","16k"]] },
+     { t:"Private", rows:[["1 Bulan","28k"]] }] }
+  ]},
+  { title:"Belajar & Produktivitas", apps:[
+   { name:"MS 365", groups:[{ t:"", s:"Full garansi", rows:[["1 Bulan","10k"]] }] },
+   { name:"Zoom Pro", groups:[{ t:"100P", rows:[["1 Hari","6k"],["7 Hari","15k"],["14 Hari","17k"],["1 Bulan","25k"]] }] },
+   { name:"Grammarly", groups:[{ t:"Sharing", s:"Full garansi", rows:[["1 Bulan","14k"],["2 Bulan","23k"]] }] },
+   { name:"Scribd", groups:[
+     { t:"Sharing", s:"Full garansi", rows:[["1 Bulan","10k"],["3 Bulan","30k"]] },
+     { t:"Private", rows:[["1 Bulan","20k"]] }] },
+   { name:"CamScanner", groups:[{ t:"Sharing", s:"Full garansi", rows:[["7 Hari","9k"],["1 Bulan","12k"],["3 Bulan","17k"],["1 Tahun","20k"]] }] },
+   { name:"GoodNotes 6", groups:[{ t:"Lifetime", rows:[["Garansi 6 Bulan","20k"],["Garansi Setahun","30k"]] }] },
+   { name:"Kilonotes", groups:[{ t:"Andro", s:"Garansi 6 bulan", rows:[["1 Tahun","20k"]] }] },
+   { name:"Wattpad", groups:[{ t:"Sharing", s:"Full garansi", rows:[["1 Bulan","12k"],["1 Tahun","27k"]] }] }
+  ]}
+ ]},
+
+ { title:"Sosmed Needs", kao:"♡(ӦｖӦ｡) 📸", subs:[
+  { title:"Instagram", apps:[
+   { name:"Instagram Like", groups:[{ t:"Like All Indonesia", rows:[["100 Like","20k"],["150 Like","22k"],["200 Like","24k"],["250 Like","27k"],["300 Like","29k"],["500 Like","33k"],["1.000 Like","40k"],["2.000 Like","65k"],["3.000 Like","75k"]] }],
+     notes:"🍮 Hanya butuh <b>link postingan</b> saja, akun tidak boleh private." },
+   { name:"Instagram Views Reels", groups:[{ t:"Views Reels", rows:[["100 Views","21k"],["150 Views","22k"],["200 Views","24k"],["250 Views","27k"],["300 Views","30k"],["500 Views","35k"],["1.000 Views","45k"],["2.000 Views","52k"],["3.000 Views","58k"]] }],
+     notes:"🍮 Hanya butuh <b>link postingan</b> saja, akun tidak boleh private." }
+  ]}
+ ]}
+];
+
+/* =========================================================
+   3) Mesin halaman — tidak perlu diubah
+   ========================================================= */
+const $ = s => document.querySelector(s);
+const esc = s => String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+
+$('#lnkCp').href = $('#ftHelp').href = CONFIG.contact;
+$('#lnkTesti').href = $('#ftTesti').href = CONFIG.testi;
+$('#lnkTele').href = $('#ftTele').href = CONFIG.tele;
+$('#siteUrl').textContent = CONFIG.siteUrl || 'kedai apps prem :3 ♡ trusted since 2020';
+
+const pages = {
+  welcome: () => `<section class="panel">
+    <h2>(⁠ ⁠◜⁠‿⁠◝⁠ ⁠)⁠♡ Welcome!</h2>
+    <p>Hai, ini page <b>${esc(CONFIG.name)}</b> ‹𝟹 kedai apps prem :3 🛒 <b>trusted since 2020</b> ☘️ Stok app di sini lengkap, tinggal pilih di menu Pricelist ya!</p>
+    <div class="info">
+      <div><span>🛋️ Open hours</span><b>${esc(CONFIG.hours)}</b></div>
+      <div><span>💳 Payment</span><b>${esc(CONFIG.payment)}</b></div>
+    </div>
+    <p>Mau lihat bukti order? Klik <b>Testimoni</b> atau ikon ★ di bawah ya (๑ᵔ⤙ᵔ๑)</p>
+    <div class="divider">♡ ♡ ♡ ♡ ♡</div>
+    <p class="note">Mohon baca T&amp;C dan konfirmasi harga ke admin dulu sebelum order ya!</p>
+    <p class="sign">all u needed here ♡</p>
+  </section>`,
+
+  tnc: () => `<section class="panel">
+    <h2>⩩ Terms &amp; Conditions</h2>
+    <ul class="tnc">
+      <li>Ini black market, membeli berarti sudah memahami dan siap menerima risiko.</li>
+      <li>Garansi ada selagi tidak melanggar rules. Klaim garansi diproses 0–3 hari, paling lama 7 hari. Kalau lewat dari itu, boleh chat admin lagi.</li>
+      <li>Setelah order, mohon sabar ya. Orderan dikerjakan sesuai urutan antrian.</li>
+      <li>Wajib baca T&amp;C sebelum order dan setelah orderan dikirim!</li>
+      <li>No refund!</li>
+    </ul>
+    <div class="divider">♡ ♡ ♡</div>
+    <p class="sign">with love, ${esc(CONFIG.name)}</p>
+  </section>`,
+
+  price: (q='') => {
+    const needle = q.trim().toLowerCase();
+    let html = '', hits = 0;
+    PRICELIST.forEach((c,ci)=>{
+      let subs = '', n = 0;
+      c.subs.forEach((s,si)=>{
+        const apps = s.apps.map((a,ai)=>({a,ai})).filter(({a})=>!needle || a.name.toLowerCase().includes(needle));
+        if(!apps.length) return;
+        n += apps.length;
+        subs += `<div class="subcat">${esc(s.title)}</div><div class="chips c${si%3}">${
+          apps.map(({a,ai})=>`<button class="chip" data-c="${ci}" data-s="${si}" data-a="${ai}">${esc(a.name)}</button>`).join('')}</div>`;
+      });
+      if(!n) return; hits += n;
+      html += `<details class="cat"${needle?' open':''}><summary>${esc(c.title)} <span class="kao">${esc(c.kao||'')}</span><span class="arrow">›</span></summary>${subs}</details>`;
+    });
+    return `<section class="panel">
+      <h2>꒰ ˶• ༝ •˶꒱ Pricelist</h2>
+      <p style="font-size:14px">Klik kategorinya dulu, terus pilih nama app-nya biar harganya muncul ♡ Yuk jajan di ${esc(CONFIG.name)}, stok app terlengkap dari yang lain! (⁠≧⁠▽⁠≦⁠)</p>
+      <label class="search"><span aria-hidden="true">⌕</span>
+        <input id="q" type="search" placeholder="Cari app… (contoh: netflix)" value="${esc(q)}" aria-label="Cari app"></label>
+      <div id="catlist">${hits ? html : `<p class="empty">“${esc(q)}” belum ada di list. Coba tanya admin langsung ya!</p>`}</div>
+      <div class="divider">♡ ♡ ♡</div>
+      <p style="text-align:center;font-size:14px;margin:0">Belum nemu yang kamu cari? <a href="${esc(CONFIG.contact)}" target="_blank" rel="noopener" style="color:var(--magenta-deep)">Chat admin aja</a></p>
+    </section>`;
+  }
+};
+
+function detail(ci,si,ai){
+  const cat = PRICELIST[ci], s = cat.subs[si], a = s.apps[ai];
+  let k = 0;
+  const groups = a.groups.map(g=>`<div class="grp">
+      ${g.t ? `<span class="grp-t">${esc(g.t)}</span>` : ''}
+      ${g.s ? `<div class="grp-s">${esc(g.s)}</div>` : ''}
+      ${g.rows.map(r=>`<button class="row" data-row="${k++}" aria-pressed="false"><span>${esc(r[0])}</span><span class="price">${esc(r[1])}</span></button>`).join('')}
+    </div>`).join('');
+  return `<section class="panel">
+    <button class="back" data-back>‹ kembali</button>
+    <p class="crumb">${esc(cat.title)} · ${esc(s.title)}</p>
+    <div class="pcard">
+      <h3>${esc(a.name)}</h3>
+      ${groups}
+      ${a.notes ? `<div class="pnotes">${a.notes}</div>` : ''}
+    </div>
+    <p class="hint">Pilih paketnya, lalu klik tombol di bawah. Teks order otomatis tersalin, tinggal paste ke admin.</p>
+    <a class="order" id="orderBtn" href="${esc(CONFIG.contact)}" target="_blank" rel="noopener">Order lewat Contact Person ♡</a>
+    <p class="toast" id="toast" aria-live="polite"></p>
+  </section>`;
+}
+
+let state = { tab:'welcome', q:'', sel:null, row:null };
+function show(html){ const v=$('#view'); v.innerHTML=html; v.style.animation='none'; void v.offsetHeight; v.style.animation=''; }
+function render(tab){
+  state.tab = tab;
+  document.querySelectorAll('nav button').forEach(b=>b.setAttribute('aria-selected', b.dataset.tab===tab));
+  show(tab==='price' ? pages.price(state.q) : pages[tab]());
+}
+function flatRows(a){ return a.groups.flatMap(g=>g.rows.map(r=>({g:g.t, r}))); }
+
+document.querySelector('nav').addEventListener('click', e=>{
+  const b = e.target.closest('button[data-tab]'); if(b) render(b.dataset.tab);
+});
+$('#view').addEventListener('click', e=>{
+  const chip = e.target.closest('.chip');
+  if(chip){
+    state.sel = [+chip.dataset.c, +chip.dataset.s, +chip.dataset.a]; state.row = null;
+    show(detail(...state.sel));
+    document.querySelector('nav').scrollIntoView({behavior:'smooth', block:'start'});
+    return;
+  }
+  if(e.target.closest('[data-back]')){ render('price'); return; }
+  const row = e.target.closest('.row');
+  if(row){
+    document.querySelectorAll('.row').forEach(r=>r.setAttribute('aria-pressed', r===row));
+    state.row = +row.dataset.row;
+    const [c,s,a] = state.sel, app = PRICELIST[c].subs[s].apps[a], it = flatRows(app)[state.row];
+    $('#orderBtn').textContent = `Order ${it.r[0]} · ${it.r[1]} ♡`;
+    return;
+  }
+  if(e.target.closest('#orderBtn') && state.sel){
+    const [c,s,a] = state.sel, app = PRICELIST[c].subs[s].apps[a];
+    const it = state.row != null ? flatRows(app)[state.row] : null;
+    const text = it ? `Halo kak, mau order ${app.name}${it.g ? ' '+it.g : ''} — ${it.r[0]} (${it.r[1]})` : `Halo kak, mau tanya ${app.name}`;
+    const t = $('#toast');
+    try{
+      navigator.clipboard.writeText(text).then(()=>{ t.textContent = 'Teks order sudah disalin, tinggal paste ke admin ya ♡'; })
+        .catch(()=>{ t.textContent = 'Kirim ke admin: ' + text; });
+    }catch(err){ t.textContent = 'Kirim ke admin: ' + text; }
+  }
+});
+$('#view').addEventListener('input', e=>{
+  if(e.target.id !== 'q') return;
+  state.q = e.target.value;
+  const tmp = document.createElement('div'); tmp.innerHTML = pages.price(state.q);
+  $('#catlist').replaceWith(tmp.querySelector('#catlist'));
+});
+
+const start = location.hash.slice(1);
+render(pages[start] ? start : 'welcome');
+</script>
+</body>
+</html>
